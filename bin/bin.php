@@ -14,8 +14,6 @@ $vod_list_max = [];
 
 $cookie = '572a0a9982db70b0b107d638369b0b95=81188b3b7556baf6e51ad1fd9c9c1e37';
 
-$wxpusher_apptoken = '';
-
 /**
  * 获取 html
  */
@@ -124,7 +122,7 @@ function checkHostContent(string $tmp_host)
             }
         }
     }
-    if (strstr($html, 'strU=') && strstr($html, 'id="hao123"')) {
+    if (strstr($html, 'strU=')) {
         $num = preg_match('/strU="(https?:\/\/[a-zA-Z0-9:\/\.]+\?u=?)"/', $html, $matches);
         if ($num) {
             $url = $matches[1] . "{$tmp_host}/&p=/";
@@ -348,27 +346,20 @@ function start()
         }
         check_image_host();
         system('php out.php');
-        shell_exec('curl -v "https://wxpusher.zjiecode.com/api/send/message/?appToken=' . $wxpusher_apptoken . '&content=hsckUpdate&topicId=10033"');
     } else if (check_image_host()) {
         system('php out.php');
-        shell_exec('curl -v "https://wxpusher.zjiecode.com/api/send/message/?appToken=' . $wxpusher_apptoken . '&content=hsckImageUrlUpdate&uid=UID_xKkkEccqH4wC2CqOY48uCMYZqVWU"');
     } else {
         echo "no update!\n";
-        shell_exec('curl -v "https://wxpusher.zjiecode.com/api/send/message/?appToken=' . $wxpusher_apptoken . '&content=hsckNoUpdate&uid=UID_xKkkEccqH4wC2CqOY48uCMYZqVWU"');
     }
 }
 
 if (!getenv('WXPUSHER_APPTOKEN')) {
-    echo "[error] get out! FUCK YOU!\n";
+    echo "[error]\n";
     exit(0);
 }
 
-$wxpusher_apptoken = getenv('WXPUSHER_APPTOKEN');
-
 if (!checkHost()) {
     echo "[error] check host error! script stop\n";
-    global $wxpusher_apptoken;
-    shell_exec('curl -v "https://wxpusher.zjiecode.com/api/send/message/?appToken=' . $wxpusher_apptoken . '&content=hsckCheckHostError&uid=UID_xKkkEccqH4wC2CqOY48uCMYZqVWU"');
     exit(0);
 }
 
