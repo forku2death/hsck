@@ -21,7 +21,7 @@ function getHtml(string $url): string
 {
     try {
         global $cookie;
-        $body = shell_exec('curl --connect-timeout 10 -m 30 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" --cookie "' . $cookie . '" ' . $url . '  2>&1');
+        $body = shell_exec('curl --connect-timeout 30 -m 90 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" --cookie "' . $cookie . '" ' . $url . '  2>&1');
 
         return $body ?: '';
     } catch (\Throwable $th) {
@@ -36,7 +36,7 @@ function getHtml(string $url): string
 function getHeader(string $url): string
 {
     try {
-        $header = shell_exec('curl  --connect-timeout 10 -m 30 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" -I ' . $url . '  2>&1');
+        $header = shell_exec('curl  --connect-timeout 30 -m 90 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" -I ' . $url . '  2>&1');
 
         return $header ?: '';
     } catch (\Throwable $th) {
@@ -51,7 +51,7 @@ function getHeader(string $url): string
 function getHeader2(string $url, string $host): string
 {
     try {
-        $curl = 'curl  --connect-timeout 10 -m 30 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" --referer ' . $host . '/ -I ' . $url;
+        $curl = 'curl  --connect-timeout 30 -m 90 -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36" --referer ' . $host . '/ -I ' . $url;
         $header = shell_exec($curl);
         return $header ?: '';
     } catch (\Throwable $th) {
