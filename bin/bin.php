@@ -353,11 +353,6 @@ function start()
     }
 }
 
-if (!getenv('WXPUSHER_APPTOKEN')) {
-    echo "[error]\n";
-    exit(0);
-}
-
 if (!checkHost()) {
     echo "[error] check host error! script stop\n";
     exit(0);
