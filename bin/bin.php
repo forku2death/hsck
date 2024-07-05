@@ -335,8 +335,8 @@ function start()
         }
     }
 
-    if ($max_page >= 0) {
-        for ($i = 1; $i <= 561; $i++) {
+    if ($max_page > 0) {
+        for ($i = 1; $i <= $max_page; $i++) {
             $list_page = $i;
             foreach ($vod_list as $vod_type_id => $vod_type_name) {
                 if (isset($vod_list_max[$vod_type_id]) && $list_page <= $vod_list_max[$vod_type_id]['page']) {
